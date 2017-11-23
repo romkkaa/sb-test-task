@@ -17,6 +17,7 @@ import java.util.Collection;
 public class ArithmeticTest {
 
     private static final Double ACCURACY = 0.01;
+    private static final String TEST_DATA_FILE_PATH = "src/test/resources/test_data.txt";
 
     @Parameter
     public String firstNumber;
@@ -27,9 +28,9 @@ public class ArithmeticTest {
     @Parameter(3)
     public String result;
 
-    @Parameters
+    @Parameters(name = "firstNumber:{0} secondNumber:{1} operator:{2} result:{3}")
     public static Collection<Object[]> data() {
-        return TestDataFileReader.readTestDataFromFile(new File("src/test/resources/test_data.txt"));
+        return TestDataFileReader.readTestDataFromFile(new File(TEST_DATA_FILE_PATH));
     }
 
     @Test
