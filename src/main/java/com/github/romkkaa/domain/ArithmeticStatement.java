@@ -7,15 +7,17 @@ public class ArithmeticStatement {
     private Operation operation;
     private Double result;
 
-    public ArithmeticStatement(String statement) {
-        String[] array = statement.split(";");
-        if (array.length != 4) {
-            throw new RuntimeException(String.format("'%s' is not a valid arithmetic statement", statement));
+    public ArithmeticStatement(String firstNumber, String secondNumber, String operator, String result) {
+        try {
+            this.firstNumber = Long.parseLong(firstNumber);
+            this.secondNumber = Long.parseLong(secondNumber);
+            this.operation = Operation.getBySign(operator);
+            this.result = Double.parseDouble(result);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(
+                    String.format("'%s;%s;%s;%s' is not a valid arithmetic statement", firstNumber, secondNumber, operator, result)
+            );
         }
-        firstNumber = Long.parseLong(array[0]);
-        secondNumber = Long.parseLong(array[1]);
-        operation = Operation.getBySign(array[2]);
-        result = Double.parseDouble(array[3]);
     }
 
     public Long getFirstNumber() {
@@ -32,6 +34,11 @@ public class ArithmeticStatement {
 
     public Double getResult() {
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s = %s", firstNumber, operation.getSign(), secondNumber, result);
     }
 
 }

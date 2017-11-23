@@ -45,7 +45,7 @@ public enum Operation {
         return sign;
     }
 
-    public BiFunction getOperationFunction() {
+    public BiFunction<Long, Long, Double> getOperationFunction() {
         return operationFunction;
     }
 
