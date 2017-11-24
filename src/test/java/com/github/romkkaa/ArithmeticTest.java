@@ -1,7 +1,7 @@
 package com.github.romkkaa;
 
-import com.github.romkkaa.domain.ArithmeticStatement;
-import com.github.romkkaa.util.ArithmeticStatementCalculator;
+import com.github.romkkaa.domain.ArithmeticExpression;
+import com.github.romkkaa.util.ArithmeticExpressionCalculator;
 import com.github.romkkaa.util.TestDataFileReader;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,7 +35,12 @@ public class ArithmeticTest {
 
     @Test
     public void testArithmeticResults() {
-        ArithmeticStatement statement = new ArithmeticStatement(firstNumber, secondNumber, operator, result);
-        Assert.assertEquals(ArithmeticStatementCalculator.calculate(statement), Double.parseDouble(result), ACCURACY);
+        ArithmeticExpression expression = new ArithmeticExpression(firstNumber, secondNumber, operator);
+        Assert.assertEquals(
+                String.format("Wrong result of arithmetic expression %s", expression),
+                ArithmeticExpressionCalculator.calculate(expression),
+                Double.parseDouble(result),
+                ACCURACY
+        );
     }
 }
